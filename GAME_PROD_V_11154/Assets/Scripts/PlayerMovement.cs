@@ -6,14 +6,17 @@ public class PlayerMovement : MonoBehaviour
 {
     //Keyboard Variables
     public CharacterController controller;
-    public float speed = 12f;
+    private float speed = 500f;
 
     //Mouse Variables
-    public float mouseSenscitivit = 250f;
+    private float mouseSenscitivit = 100f;
     public Transform playerBody;
- //  public Camera cameraView;
-    float rotationX = 0f;
 
+    //physics variables
+    public Rigidbody playerRigidbody;
+
+    //gun variables
+    public ParticleSystem muzzeflash;
 
     // Start is called before the first frame update
     void Start()
@@ -30,16 +33,19 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+        //controller.Move(move * speed * Time.deltaTime);
+
+        playerRigidbody.AddForce(move * speed * Time.deltaTime);
 
         //Mouse Controll
         float mouseX = Input.GetAxis("Mouse X") * mouseSenscitivit * Time.deltaTime;
-      //  float mouseY = Input.GetAxis("Mouse Y") * mouseSenscitivit * Time.deltaTime;
-
-      //  rotationX -= mouseY;
-        //rotationX = Mathf.Clamp(rotationX, -90f, 90f);
-
-        //cameraView.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+     
         playerBody.Rotate(Vector3.up * mouseX);
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("FIRE");
+            muzzeflash.Play(); 
+        }
     }
 }
