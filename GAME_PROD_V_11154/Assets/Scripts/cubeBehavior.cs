@@ -5,23 +5,37 @@ using UnityEngine;
 public class cubeBehavior : MonoBehaviour
 {
     public Transform ship_pos;
+    private int x_initial;
+    private int z_initial;
+
+ 
+
     // Start is called before the first frame update
     void Start()
     {
-       
-       
+       x_initial = (int)transform.position.x;
+       z_initial = (int)transform.position.z;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         ship_pos = GameObject.Find("Low_poly_UFO").GetComponent<Transform>();
-        if (this.transform.position.x > (int)ship_pos.position.x + 10
-                  || this.transform.position.x < (int)ship_pos.position.x - 10
-                  || this.transform.position.z > (int)ship_pos.position.z + 10
-                  || this.transform.position.z < (int)ship_pos.position.z - 10)
-        {
-            this.gameObject.SetActive(false);
-        }
+
+        UpdateCubePosition(ship_pos);
+    }
+
+    void UpdateCubePosition(Transform ship_pos)
+    {
+
+        // get the x and z position based on the ship
+        int x = x_initial + (int)ship_pos.position.x;
+        int z = z_initial + (int)ship_pos.position.z;
+
+        // set the x and z and calculates and sets the y based on the x and z position 
+        transform.position = new Vector3(x,
+                                         Mathf.PerlinNoise(x * 0.2f, z * 0.2f) * 3.75f,
+                                         z);
     }
 }

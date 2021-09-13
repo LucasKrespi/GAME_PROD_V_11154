@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //Keyboard Variables
-    public CharacterController controller;
+   
     private float speed = 500f;
 
     //Mouse Variables
@@ -33,14 +33,18 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        //controller.Move(move * speed * Time.deltaTime);
-
         playerRigidbody.AddForce(move * speed * Time.deltaTime);
 
         //Mouse Controll
         float mouseX = Input.GetAxis("Mouse X") * mouseSenscitivit * Time.deltaTime;
      
         playerBody.Rotate(Vector3.up * mouseX);
+
+        //Slow ship
+        if (Input.GetButtonDown("Brake"))
+        {
+            playerRigidbody.velocity = Vector3.zero;
+        }
 
         if (Input.GetButtonDown("Fire1"))
         {
