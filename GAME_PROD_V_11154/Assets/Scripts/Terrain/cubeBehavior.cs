@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class cubeBehavior : MonoBehaviour
 {
-     private int x_initial;
+    private int x_initial;
     private int z_initial;
 
  

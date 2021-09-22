@@ -11,14 +11,14 @@ public class CreateLandscape : MonoBehaviour
     public int depht;
     public int half_depht;
     private int num_Cows = 20;
-   // public GameObject cow_Prefab;
+    public GameObject cow_Prefab;
     // Start is called before the first frame update
     void Start()
     {
         half_depht = depht / 2;
         half_width = width / 2;
         StartLandScape();
-       
+        spawCows();
     }
 
  
@@ -42,18 +42,20 @@ public class CreateLandscape : MonoBehaviour
 
     }
 
-    //void spawCows()
-    //{
-    //    int counter = 0;
+    void spawCows()
+    {
+        int counter = 0;
 
-    //    while (counter < num_Cows)
-    //    {
-    //        Vector3 cow_pos = new Vector3(Random.Range(((int)GameControl.ship_Transform.position.x - half_width), ((int)GameControl.ship_Transform.position.x + half_width)),
-    //                                      5.0f,
-    //                                      Random.Range(((int)GameControl.ship_Transform.position.z - half_depht), ((int)GameControl.ship_Transform.position.z + half_depht)));
-    //        GameObject cow = Instantiate(cow_Prefab, cow_pos, Quaternion.identity);
-    //    }
-    //}
+        while (counter < num_Cows)
+        {
+            Vector3 cow_pos = new Vector3(Random.Range(((int)GameControl.ship_Transform.position.x - half_width), ((int)GameControl.ship_Transform.position.x + half_width)),
+                                          5.0f,
+                                          Random.Range(((int)GameControl.ship_Transform.position.z - half_depht), ((int)GameControl.ship_Transform.position.z + half_depht)));
+            
+            GameObject cow = Instantiate(cow_Prefab, cow_pos, Quaternion.identity);
+            counter++;
+        }
+    }
 
-   
+
 }

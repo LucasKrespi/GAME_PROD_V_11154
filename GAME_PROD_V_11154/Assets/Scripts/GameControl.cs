@@ -17,7 +17,6 @@ public class GameControl : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
             Application.Quit();
-            Debug.Log("QUIT");
         }
 
     }

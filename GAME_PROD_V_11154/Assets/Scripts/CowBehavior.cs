@@ -7,12 +7,16 @@ public class CowBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(TurnOnGravity());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator TurnOnGravity()
     {
-        
+
+        yield return new WaitForSeconds(1);
+
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
+
     }
+
 }
