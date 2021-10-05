@@ -33,7 +33,7 @@ public class cubeBehavior : MonoBehaviour
 
         // set the x and z and calculates and sets the y based on the x and z position 
         transform.position = new Vector3(x,
-                                         Mathf.PerlinNoise(x * 0.2f, z * 0.2f) * 3.75f,
+                                        GameControl.singletonGamecontrol.Noise(x, z),
                                          z);
     }
 }

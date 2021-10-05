@@ -40,16 +40,12 @@ public class Pool : MonoBehaviour
     {
         for(int i = 0; i < pooledItens.Count; i++)
         {
-            if (!pooledItens[i].activeInHierarchy && pooledItens[i].tag == tag)
+            if (!pooledItens[i].activeInHierarchy && pooledItens[i].CompareTag(tag))
             {
                 return pooledItens[i];
             }
         }
         return null;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

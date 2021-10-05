@@ -1,0 +1,30 @@
+==========================Build Notes================================
+This Current Build Demostrates movement and terraing generation,
+and spawm of cows and trees. 
+In this Build you can also abduct the cows and turn on the abduction
+cam.
+===========================Controls==================================
+
+right mouse click - start abduction.
+
+left shift - turn on/off abduction camera.
+
+space - brake.
+
+WASD - move around.
+
+esc - quit application.
+
+===========================Comments ==================================
+
+Ship movement gets loked during abduction.->intentionally
+Currently the game has only one state(game state).
+Trees spawn in some wierd places.
+The cameras have great room for improovement.
+
+===========================For Next Build=============================
+-Add Meteor as obstacles;
+-Add a scorring system;
+-populate the word with more objs;
+-add some sort of AI to the cows (still thinking about how this is going to work);
+-add AI, Menus and pause state;

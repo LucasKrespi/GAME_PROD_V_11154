@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 0
-  m_LinearFogEnd: 10
+  m_LinearFogEnd: 15
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -148,13 +148,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5929058}
-  m_LocalRotation: {x: 0.104414165, y: -0, z: -0, w: 0.9945339}
-  m_LocalPosition: {x: 0, y: 2.242, z: -4.548}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 4, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1470709628}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 11.987, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!81 &5929060
 AudioListener:
   m_ObjectHideFlags: 0
@@ -236,8 +236,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - prefab: {fileID: 6465758813329853454, guid: 9c8e391e76c63894e87bc0b919850b13, type: 3}
-    quantity: 1600
+  - prefab: {fileID: 3045662202357355078, guid: 5224bd6aa3b8107458003e3ee727dfc8, type: 3}
+    quantity: 80
+  - prefab: {fileID: 7838868444724488505, guid: 5582cc549d9b64f4aa12e806e458bc22, type: 3}
+    quantity: 20
   pooledItens: []
 --- !u!4 &59687669
 Transform:
@@ -372,7 +374,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388308515}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.9, z: -0}
+  m_LocalPosition: {x: 0, y: 0.79, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1394750604}
@@ -5405,13 +5407,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.6830127, y: -0.18301266, z: 0.18301266, w: 0.6830127}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -30, z: 0}
 --- !u!1 &893951352
 GameObject:
   m_ObjectHideFlags: 0
@@ -5500,15 +5502,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89c3110e7f97e44418fe196964743a7d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89c3110e7f97e44418fe196964743a7d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89c3110e7f97e44418fe196964743a7d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89c3110e7f97e44418fe196964743a7d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5516,7 +5518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89c3110e7f97e44418fe196964743a7d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.511
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89c3110e7f97e44418fe196964743a7d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5684,6 +5686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e48e50bc520d79b408f98d75417db150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  V1: 0.2
+  V2: 3.5
 --- !u!4 &1072516618
 Transform:
   m_ObjectHideFlags: 0
@@ -10707,11 +10711,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4750b7ae04409ff4e8277f11ccc0650a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 40
+  width: 80
   half_width: 0
-  depht: 40
+  depht: 80
   half_depht: 0
-  cow_Prefab: {fileID: 7838868444724488505, guid: 5582cc549d9b64f4aa12e806e458bc22, type: 3}
+  terrain_prefab: {fileID: 6465758813329853454, guid: 9c8e391e76c63894e87bc0b919850b13, type: 3}
 --- !u!4 &1396747283
 Transform:
   m_ObjectHideFlags: 0

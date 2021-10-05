@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - cow
+  - tree
   layers:
   - Default
   - TransparentFX

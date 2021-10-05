@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
                     cowhit = true;
                     playerRigidbody.velocity = Vector3.zero;
 
-                    hit.rigidbody.velocity = new Vector3(0.0f, 1.0f, 0.0f);
+                    hit.rigidbody.velocity = new Vector3(0.0f, 2.0f, 0.0f);
                   
                     hit.rigidbody.useGravity = false;
                 }
@@ -74,9 +74,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "cow")
+        if(collision.gameObject.CompareTag("cow"))
         {
-            Destroy(collision.gameObject);
+
+            //Put cow back to the pool, and reseting initial settings
+            collision.gameObject.SetActive(false);
+            collision.rigidbody.useGravity = true;
+            collision.rigidbody.velocity = Vector3.zero;
+            collision.transform.rotation = Quaternion.identity;
             cowhit = false;
             muzzeflash.Play();
         }
