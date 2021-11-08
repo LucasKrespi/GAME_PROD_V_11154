@@ -15,6 +15,8 @@ public class ButtonManager : MonoBehaviour
 
     float buttonGoal_pos;
 
+    public float abductionVelocity;
+
     private bool moveStart, moveExit, moveHighScore;
 
 
@@ -34,11 +36,23 @@ public class ButtonManager : MonoBehaviour
     {
         buttonGoal_pos = selectedButtonFlag.transform.position.y;
 
+        if(startButton.transform.position.y >= buttonGoal_pos - 10)
+        {
+            SceneManager.LoadScene(1);
+        }
+
+        if (exitButton.transform.position.y >= buttonGoal_pos - 10)
+        {
+            Application.Quit();
+        }
+    }
+    private void FixedUpdate()
+    {
         if (EventSystem.current.currentSelectedGameObject == startButton.gameObject)
         {
             Vector3 goal_pos = startButton.transform.position;
 
-            selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, 0.1f), initial_pos.y, initial_pos.z);
+            selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, abductionVelocity), initial_pos.y, initial_pos.z);
 
             initial_pos = selectedButtonFlag.transform.position;
         }
@@ -47,8 +61,8 @@ public class ButtonManager : MonoBehaviour
         {
             Vector3 goal_pos = highScoreButton.transform.position;
 
-            selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, 0.1f), initial_pos.y, initial_pos.z);
-           
+            selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, abductionVelocity), initial_pos.y, initial_pos.z);
+
             initial_pos = selectedButtonFlag.transform.position;
         }
 
@@ -56,10 +70,11 @@ public class ButtonManager : MonoBehaviour
         {
             Vector3 goal_pos = exitButton.transform.position;
 
-            selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, 0.1f), initial_pos.y, initial_pos.z);
+            selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, abductionVelocity), initial_pos.y, initial_pos.z);
 
             initial_pos = selectedButtonFlag.transform.position;
         }
+
 
         if (moveStart && startButton.transform.position.y < buttonGoal_pos)
         {
@@ -76,18 +91,13 @@ public class ButtonManager : MonoBehaviour
         {
             whenClicked(highScoreButton);
         }
-
-        if(startButton.transform.position.y >= buttonGoal_pos - 10)
-        {
-            SceneManager.LoadScene(1);
-        }
     }
 
     private void whenClicked(Button selectedButton)
     {
-        selectedButton.transform.position = new Vector3(selectedButton.transform.position.x, Mathf.Lerp(selectedButton.transform.position.y, buttonGoal_pos, 0.005f), selectedButton.transform.position.z);
+        selectedButton.transform.position = new Vector3(selectedButton.transform.position.x, Mathf.Lerp(selectedButton.transform.position.y, buttonGoal_pos, abductionVelocity), selectedButton.transform.position.z);
 
-        selectedButton.transform.localScale = selectedButton.transform.localScale * Mathf.Lerp(1.0f, 0.5f, 0.005f);
+        selectedButton.transform.localScale = selectedButton.transform.localScale * Mathf.Lerp(1.0f, 0.5f, abductionVelocity);
 
         selectedButton.transform.Rotate(new Vector3(0.0f, 0.0f, 1.0f));
     }

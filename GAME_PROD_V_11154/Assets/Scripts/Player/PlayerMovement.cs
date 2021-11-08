@@ -19,10 +19,13 @@ public class PlayerMovement : MonoBehaviour
     public ParticleSystem muzzeflash;
     private bool cowhit = false;
 
+    public int score;
+    public int lives = 5;
+
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     // Update is called once per frame
@@ -53,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Abduction
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetAxisRaw("Fire1") == 1)
         {
             RaycastHit hit;
 
@@ -70,21 +73,31 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            lives--;
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("cow"))
         {
-
             //Put cow back to the pool, and reseting initial settings
-            collision.gameObject.SetActive(false);
-            collision.rigidbody.useGravity = true;
-            collision.rigidbody.velocity = Vector3.zero;
-            collision.transform.rotation = Quaternion.identity;
-            cowhit = false;
+            resetToPoll(collision);
+            score = score + 100;
             muzzeflash.Play();
         }
     }
 
+    private void resetToPoll(Collision collision)
+    {
+        collision.gameObject.SetActive(false);
+        collision.rigidbody.useGravity = true;
+        collision.rigidbody.velocity = Vector3.zero;
+        collision.transform.rotation = Quaternion.identity;
+        cowhit = false;
+    }
 }

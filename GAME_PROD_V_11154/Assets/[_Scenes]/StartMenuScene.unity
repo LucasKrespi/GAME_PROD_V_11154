@@ -486,7 +486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.5199766, y: 0}
+  m_AnchoredPosition: {x: 7.519989, y: 0}
   m_SizeDelta: {x: -15.040047, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1023029439
@@ -669,6 +669,7 @@ MonoBehaviour:
   highScoreButton: {fileID: 1452636741}
   exitButton: {fileID: 1375695264}
   selectedButtonFlag: {fileID: 64267676}
+  abductionVelocity: 0.05
 --- !u!1 &1268411233
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,10 +825,10 @@ RectTransform:
   m_Father: {fileID: 1134909180}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -378.7287, y: -342.50122}
-  m_SizeDelta: {x: 133.7628, y: 87.738}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 220.2713, y: 85.49878}
+  m_SizeDelta: {x: 133.76282, y: 87.73801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1375695264
 MonoBehaviour:
@@ -945,10 +946,10 @@ RectTransform:
   m_Father: {fileID: 1134909180}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 327.5901, y: -374.3977}
-  m_SizeDelta: {x: 133.9119, y: 101.4567}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -271.4099, y: 53.602295}
+  m_SizeDelta: {x: 133.91187, y: 101.456696}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1452636741
 MonoBehaviour:
