@@ -10,6 +10,7 @@ public class PauseMenuScript : MonoBehaviour
     // Start is called before the first frame update
     public Button resumeButton, exitButton;
     public Image selectedButtonFlag;
+    public Canvas UIhud;
 
 
     Vector3 resumeButtonInitialPosition, initiaScale;
@@ -39,6 +40,8 @@ public class PauseMenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UIhud.gameObject.SetActive(true);
+
         buttonGoal_pos = selectedButtonFlag.transform.position.y;
 
         if (resumeButton.transform.position.y >= buttonGoal_pos - 10)
@@ -84,11 +87,6 @@ public class PauseMenuScript : MonoBehaviour
         {
             whenClicked(exitButton);
         }
-
-    }
-
-    private void FixedUpdate()
-    {
 
     }
 

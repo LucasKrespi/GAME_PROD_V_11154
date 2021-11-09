@@ -7,21 +7,20 @@ public class TreeBehavior : MonoBehaviour
    
     private void Update()
     {
-        if (Mathf.Abs(GameControl.ship_Transform.position.magnitude - transform.position.magnitude) > 20)
+        if (Mathf.Abs(GameControl.ship_Transform.position.magnitude - transform.position.magnitude) > 15)
         {
             ThrowBackInPool();
         }
     }
     public void OnTakeFromPool(Vector3 pos)
     {
-        GameControl.Occupied_pos.Add(pos);
+        FindObjectOfType<GameControl>().Occupied_pos.AddLast(pos);
         transform.position = pos;
         gameObject.SetActive(true);
     }
 
     public void ThrowBackInPool()
     {
-        GameControl.Occupied_pos.Remove(this.transform.position);
         gameObject.SetActive(false);
     }
 }

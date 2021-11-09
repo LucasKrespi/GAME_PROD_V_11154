@@ -33,7 +33,6 @@ public class CowBehavior : MonoBehaviour
 
     public void ThrowBackInPool()
     {
-        GameControl.Occupied_pos.Remove(this.transform.position);
         gameObject.SetActive(false);
         cow_rigidbody.useGravity = true;
         cow_rigidbody.transform.rotation = Quaternion.identity;
@@ -41,7 +40,7 @@ public class CowBehavior : MonoBehaviour
 
     public void OnTakeFromPool(Vector3 pos)
     {
-        GameControl.Occupied_pos.Add(pos);
+        FindObjectOfType<GameControl>().Occupied_pos.AddLast(pos);
         this.gameObject.SetActive(true);
         this.transform.position = pos;
     }

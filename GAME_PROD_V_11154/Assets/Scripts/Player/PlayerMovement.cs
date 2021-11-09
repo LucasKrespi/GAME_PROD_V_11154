@@ -19,15 +19,12 @@ public class PlayerMovement : MonoBehaviour
     public ParticleSystem muzzeflash;
     private bool cowhit = false;
 
+    //Hud and game control
     public int score;
+    public int cowsCounter = 0;
     public int lives = 5;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+  
     // Update is called once per frame
     void Update()
     {
@@ -89,6 +86,19 @@ public class PlayerMovement : MonoBehaviour
             resetToPoll(collision);
             score = score + 100;
             muzzeflash.Play();
+            cowsCounter++;
+
+            if(cowsCounter % 10 == 0)
+            {
+                FindObjectOfType<GameControl>().timer = FindObjectOfType<GameControl>().timer + 20;
+            }
+        }
+
+        if (collision.gameObject.CompareTag("meteor"))
+        {
+            lives--;
+
+            FindObjectOfType<GameControl>().timer = FindObjectOfType<GameControl>().timer - 10;
         }
     }
 

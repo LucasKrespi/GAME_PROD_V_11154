@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameControl : MonoBehaviour
@@ -11,27 +12,36 @@ public class GameControl : MonoBehaviour
     private PlayerMovement ship_PlayerMovement;
     public static GameControl singletonGamecontrol;
 
-    public static List<Vector3> Occupied_pos;
+    public LinkedList<Vector3> Occupied_pos;
 
     private float perlinNoiseStepOne = 0.2f;
     private float perlinNoiseStepTwo = 3.75f;
 
     //UIHud Varriables
+    public Canvas UIhud;
     //Timer
     private TextMeshProUGUI timerText;
-    private float timer;
+    public float timer;
     float time = 0;
     private int seconds;
     private int minutes;
     //Score
     private TextMeshProUGUI scoreText;
+    
     //Lives
     [SerializeField]
     private List<Image> livesList;
 
     private void Awake()
     {
-        singletonGamecontrol = this;
+        if(singletonGamecontrol == null)
+        {
+            singletonGamecontrol = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
     private void Start()
     {
@@ -46,7 +56,7 @@ public class GameControl : MonoBehaviour
         ship_Transform = ship_gameObject.GetComponent<Transform>();
         ship_PlayerMovement = ship_gameObject.GetComponent<PlayerMovement>();
 
-        Occupied_pos = new List<Vector3>(Pool.singletonPool.pooledItens.Count);
+        Occupied_pos = new LinkedList<Vector3>();
 
         timerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
@@ -62,6 +72,7 @@ public class GameControl : MonoBehaviour
 
         if (Input.GetButtonDown("Cancel"))
         {
+            UIhud.gameObject.SetActive(false);
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
             pauseMenu.gameObject.SetActive(true);
@@ -69,6 +80,10 @@ public class GameControl : MonoBehaviour
 
         checkGameOver();
 
+        if(Occupied_pos.Count > 200)
+        {
+            Occupied_pos.RemoveFirst();
+        }
     }
 
     public float Noise(int x, int y)
@@ -77,7 +92,7 @@ public class GameControl : MonoBehaviour
         return temp;
     }
 
-    public static bool isPosOccupied(Vector3 tested)
+    public bool isPosOccupied(Vector3 tested)
     {
         foreach(Vector3 t in Occupied_pos)
         {
@@ -145,6 +160,9 @@ public class GameControl : MonoBehaviour
         {
            ship_PlayerMovement.score++;
         }
+
+        
+
         
 
         if (ship_PlayerMovement.score < 0)
@@ -183,7 +201,10 @@ public class GameControl : MonoBehaviour
     {
         if(ship_PlayerMovement.lives == 0 || (minutes == 0) && (seconds == 0))
         {
-            Debug.Log("GAME OVER");
+            //Temporary save score will be changed to json or a txt file for final submission.
+            PlayerPrefs.SetInt("score", ship_PlayerMovement.score);
+
+            SceneManager.LoadScene(2);
         }
     }
 }

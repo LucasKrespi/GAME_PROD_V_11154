@@ -11,6 +11,11 @@ public class CreateLandscape : MonoBehaviour
     public int depht;
     public int half_depht;
     public GameObject terrain_prefab;
+    public GameObject meteorPrefab;
+
+
+    private int metorCounter = 0;
+    private int killerShotCounter = 1;
 
     private int spawnSafeArea = 10;
     // Start is called before the first frame update
@@ -23,11 +28,11 @@ public class CreateLandscape : MonoBehaviour
         spawCows();
     }
 
-
-    private void Update()
+    private void FixedUpdate()
     {
         spawCows();
         spawTrees();
+        spawMeteors();
     }
     void StartLandScape()
     {
@@ -58,9 +63,9 @@ public class CreateLandscape : MonoBehaviour
             int x_pos = Random.Range((int)x_pos1, (int)x_pos2);
             int z_pos = Random.Range((int)z_pos1, (int)z_pos2);
 
-            Vector3 cow_pos = new Vector3(x_pos , (GameControl.singletonGamecontrol.Noise(x_pos, z_pos) + 0.5f) , z_pos);
+            Vector3 cow_pos = new Vector3(x_pos , (GameControl.singletonGamecontrol.Noise(x_pos, z_pos) + 1.0f ) , z_pos);
 
-            if (!GameControl.isPosOccupied(cow_pos))
+            if (!FindObjectOfType<GameControl>().isPosOccupied(cow_pos))
             {
 
                 GameObject cow = Pool.singletonPool.GetPoolItem("cow");
@@ -98,7 +103,7 @@ public class CreateLandscape : MonoBehaviour
                                           GameControl.singletonGamecontrol.Noise(x_pos, z_pos) + 0.5f,
                                           z_pos);
 
-            if(!GameControl.isPosOccupied(tree_pos))
+            if(!FindObjectOfType<GameControl>().isPosOccupied(tree_pos))
             {
 
                 GameObject tree = Pool.singletonPool.GetPoolItem("tree");
@@ -114,6 +119,29 @@ public class CreateLandscape : MonoBehaviour
             }
 
         }
+    }
+
+    void spawMeteors()
+    {
+        if (metorCounter % 30 == 0)
+        {
+            float x_pos = Random.Range(GameControl.ship_Transform.position.x - 10, GameControl.ship_Transform.position.x + 10);
+            float z_pos = Random.Range(GameControl.ship_Transform.position.z - 10, GameControl.ship_Transform.position.z + 10);
+
+            Instantiate(meteorPrefab, new Vector3(x_pos, 10, z_pos), Quaternion.identity);
+
+            metorCounter = 0;
+        }
+
+        if (killerShotCounter % 240 == 0)
+        {
+            Instantiate(meteorPrefab, new Vector3(GameControl.ship_Transform.position.x, 10, GameControl.ship_Transform.position.z), Quaternion.identity);
+
+            killerShotCounter = 0;
+        }
+        
+        metorCounter++;
+        killerShotCounter++;
     }
 
 

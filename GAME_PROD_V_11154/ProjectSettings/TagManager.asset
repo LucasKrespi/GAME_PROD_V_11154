@@ -7,6 +7,7 @@ TagManager:
   - Terrain
   - cow
   - tree
+  - meteor
   layers:
   - Default
   - TransparentFX
