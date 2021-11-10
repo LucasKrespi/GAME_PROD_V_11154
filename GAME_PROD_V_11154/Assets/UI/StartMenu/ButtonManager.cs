@@ -22,6 +22,11 @@ public class ButtonManager : MonoBehaviour
 
     void Start()
     {
+        init();
+    }
+
+    private void init()
+    {
         initial_pos = selectedButtonFlag.transform.position;
 
         startButton.Select();
@@ -116,4 +121,5 @@ public class ButtonManager : MonoBehaviour
     {
         moveHighScore = true;
     }
+
 }

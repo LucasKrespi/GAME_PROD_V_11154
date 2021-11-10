@@ -8,20 +8,22 @@ using UnityEngine.SceneManagement;
 public class PauseMenuScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Button resumeButton, exitButton;
+    public Button resumeButton, mainMenuButton, resetePositionButton;
     public Image selectedButtonFlag;
     public Canvas UIhud;
+    public Transform playerTrasform;
 
-
-    Vector3 resumeButtonInitialPosition, initiaScale;
+    Vector3 resumeButtonInitialPosition, initiaScale, resetePositionButtonInitialPosition;
     Vector3 initial_pos;
+
+    
   
 
     float buttonGoal_pos;
 
     public float abductionVelocity;
 
-    private bool moveStart, moveExit;
+    private bool moveStart, moveMainMenu, moveResetePosition;
 
 
     void Start()
@@ -33,8 +35,11 @@ public class PauseMenuScript : MonoBehaviour
         resumeButtonInitialPosition = resumeButton.transform.position;
         initiaScale = resumeButton.transform.localScale;
 
+        resetePositionButtonInitialPosition = resetePositionButton.transform.position;
+
         resumeButton.onClick.AddListener(ResumeButtonClick);
-        exitButton.onClick.AddListener(ExitButtonClick);
+        mainMenuButton.onClick.AddListener(mainMenuButtonClick);
+        resetePositionButton.onClick.AddListener(resetePositionButtonClick);
     }
 
     // Update is called once per frame
@@ -55,10 +60,32 @@ public class PauseMenuScript : MonoBehaviour
             Time.timeScale = 1;
         }
 
-        if (exitButton.transform.position.y >= buttonGoal_pos - 10)
+        if (mainMenuButton.transform.position.y >= buttonGoal_pos - 10)
         {
-            Application.Quit();
+            Time.timeScale = 1;
+            SceneManager.LoadScene(0);
         }
+
+
+        if (resetePositionButton.transform.position.y >= buttonGoal_pos - 10)
+        {
+            resetePositionButton.transform.position = resetePositionButtonInitialPosition;
+            resetePositionButton.transform.localScale = initiaScale;
+            moveResetePosition = false;
+            playerTrasform.gameObject.GetComponent<PlayerMovement>().cowhit = false;
+
+            playerTrasform.position = new Vector3(0.0f, 4.3f, 0.0f);
+
+            gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
+        }
+
+
+
+
+
+
 
         if (EventSystem.current.currentSelectedGameObject == resumeButton.gameObject)
         {
@@ -69,23 +96,41 @@ public class PauseMenuScript : MonoBehaviour
             initial_pos = selectedButtonFlag.transform.position;
         }
 
-        if (EventSystem.current.currentSelectedGameObject == exitButton.gameObject)
+        if (EventSystem.current.currentSelectedGameObject == mainMenuButton.gameObject)
         {
-            Vector3 goal_pos = exitButton.transform.position;
+            Vector3 goal_pos = mainMenuButton.transform.position;
 
             selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, abductionVelocity * Time.unscaledDeltaTime) , initial_pos.y, initial_pos.z);
 
             initial_pos = selectedButtonFlag.transform.position;
         }
 
+        if (EventSystem.current.currentSelectedGameObject == resetePositionButton.gameObject)
+        {
+            Vector3 goal_pos = resetePositionButton.transform.position;
+
+            selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, abductionVelocity * Time.unscaledDeltaTime), initial_pos.y, initial_pos.z);
+
+            initial_pos = selectedButtonFlag.transform.position;
+        }
+
+
+
+
+
         if (moveStart && resumeButton.transform.position.y < buttonGoal_pos)
         {
             whenClicked(resumeButton);
         }
 
-        if (moveExit && exitButton.transform.position.y < buttonGoal_pos)
+        if (moveMainMenu && mainMenuButton.transform.position.y < buttonGoal_pos)
         {
-            whenClicked(exitButton);
+            whenClicked(mainMenuButton);
+        }
+
+        if (moveResetePosition && resetePositionButton.transform.position.y < buttonGoal_pos)
+        {
+            whenClicked(resetePositionButton);
         }
 
     }
@@ -104,8 +149,13 @@ public class PauseMenuScript : MonoBehaviour
         moveStart = true;
     }
 
-    private void ExitButtonClick()
+    private void mainMenuButtonClick()
     {
-        moveExit = true;
+        moveMainMenu = true;
+    }
+
+    private void resetePositionButtonClick()
+    {
+        moveResetePosition = true;
     }
 }

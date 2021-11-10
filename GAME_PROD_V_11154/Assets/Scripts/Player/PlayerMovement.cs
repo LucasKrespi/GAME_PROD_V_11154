@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     //Keyboard Variables
    
     private float speed = 500f;
+    private float maxVelocity = 10;
 
     //Mouse Variables
     private float mouseSenscitivit = 100f;
@@ -17,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     //gun variables
     public ParticleSystem muzzeflash;
-    private bool cowhit = false;
+    public bool cowhit = false;
 
     //Hud and game control
     public int score;
@@ -38,7 +39,9 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 move = transform.right * x + transform.forward * z;
 
+            
             playerRigidbody.AddForce(move * speed * Time.deltaTime);
+           
         }
 
         //Mouse Controll
@@ -71,9 +74,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        //limit velocity
+
+        if (playerRigidbody.velocity.magnitude > maxVelocity)
         {
-            lives--;
+            playerRigidbody.velocity *= 0.9f;
         }
 
     }
@@ -98,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         {
             lives--;
 
-            FindObjectOfType<GameControl>().timer = FindObjectOfType<GameControl>().timer - 10;
+            FindObjectOfType<GameControl>().timer = FindObjectOfType<GameControl>().timer - 30;
         }
     }
 
