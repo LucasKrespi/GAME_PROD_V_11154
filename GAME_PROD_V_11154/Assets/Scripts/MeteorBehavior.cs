@@ -6,10 +6,12 @@ public class MeteorBehavior : MonoBehaviour
 {
     public ParticleSystem trail, explosion;
     public GameObject Meteor;
+    public SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
-        trail.Play(); 
+        trail.Play();
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,10 @@ public class MeteorBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+       
+        
+        //soundManager.PlaySound("Explosion");
+        
         explosion.Play();
 
         Destroy(Meteor);

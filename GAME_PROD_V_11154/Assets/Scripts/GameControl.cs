@@ -32,6 +32,9 @@ public class GameControl : MonoBehaviour
     [SerializeField]
     private List<Image> livesList;
 
+    //Sounds
+    public SoundManager soundManager;
+
     private void Awake()
     {
         if(singletonGamecontrol == null)
@@ -45,6 +48,9 @@ public class GameControl : MonoBehaviour
     }
     private void Start()
     {
+
+        soundManager = FindObjectOfType<SoundManager>();
+
         seconds = 0;
         minutes = 0;
         timer = 180;
@@ -60,6 +66,8 @@ public class GameControl : MonoBehaviour
 
         timerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
+
+        soundManager.PlaySound("MetorAlert");
 
     }
     void Update()
@@ -204,6 +212,7 @@ public class GameControl : MonoBehaviour
             //Temporary save score will be changed to json or a txt file for final submission.
             PlayerPrefs.SetInt("score", ship_PlayerMovement.score);
 
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene(3);
         }
     }

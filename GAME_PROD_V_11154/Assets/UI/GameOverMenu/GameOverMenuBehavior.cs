@@ -9,6 +9,7 @@ public class GameOverMenuBehavior : MonoBehaviour
 {
     public Button mainMenuButton, exitButton;
     public Image selectedButtonFlag;
+    public SoundManager soundManager;
 
     Vector3 initial_pos;
 
@@ -21,16 +22,23 @@ public class GameOverMenuBehavior : MonoBehaviour
     public TextMeshProUGUI score;
 
 
+
     void Start()
     {
+
         initial_pos = selectedButtonFlag.transform.position;
 
         mainMenuButton.Select();
+        soundManager = FindObjectOfType<SoundManager>();
 
         mainMenuButton.onClick.AddListener(StartButtonClick);
         exitButton.onClick.AddListener(ExitButtonClick);
 
         score.text = "Score: " + PlayerPrefs.GetInt("score");
+
+        soundManager.StopSound("BackgroundSound");
+        soundManager.PlaySound("Lucas");
+
     }
 
     // Update is called once per frame
@@ -93,10 +101,12 @@ public class GameOverMenuBehavior : MonoBehaviour
     private void StartButtonClick()
     {
         moveStart = true;
+        soundManager.PlaySound("Moo");
     }
 
     private void ExitButtonClick()
     {
         moveExit = true;
+        soundManager.PlaySound("Moo");
     }
 }

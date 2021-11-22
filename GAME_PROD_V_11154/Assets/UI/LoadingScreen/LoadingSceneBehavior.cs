@@ -13,6 +13,7 @@ public class LoadingSceneBehavior : MonoBehaviour
     
     private IEnumerator Loadinscene()
     {
+        FindObjectOfType<SoundManager>().PlaySound("Frase");
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene(2);
 

@@ -10,6 +10,8 @@ public class ButtonManager : MonoBehaviour
     // Start is called before the first frame update
     public Button startButton, highScoreButton, exitButton;
     public Image selectedButtonFlag;
+    public SoundManager soundManager;
+
 
     Vector3 initial_pos;
 
@@ -22,7 +24,9 @@ public class ButtonManager : MonoBehaviour
 
     void Start()
     {
+        soundManager = FindObjectOfType<SoundManager>();
         init();
+
     }
 
     private void init()
@@ -110,16 +114,24 @@ public class ButtonManager : MonoBehaviour
     private void StartButtonClick()
     {
         moveStart = true;
+        soundManager.PlaySound("Moo");
+        soundManager.PlaySound("Abduction");
     }
 
     private void ExitButtonClick()
     {
         moveExit = true;
+        soundManager.PlaySound("Moo");
+        soundManager.PlaySound("Abduction");
+
     }
 
     private void HighScoreButtonClick()
     {
         moveHighScore = true;
+        soundManager.PlaySound("Moo");
+        soundManager.PlaySound("Abduction");
+
     }
 
 }

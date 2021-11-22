@@ -16,8 +16,8 @@ public class PauseMenuScript : MonoBehaviour
     Vector3 resumeButtonInitialPosition, initiaScale, resetePositionButtonInitialPosition;
     Vector3 initial_pos;
 
-    
-  
+
+    public SoundManager soundManager;
 
     float buttonGoal_pos;
 
@@ -40,6 +40,8 @@ public class PauseMenuScript : MonoBehaviour
         resumeButton.onClick.AddListener(ResumeButtonClick);
         mainMenuButton.onClick.AddListener(mainMenuButtonClick);
         resetePositionButton.onClick.AddListener(resetePositionButtonClick);
+
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     // Update is called once per frame
@@ -147,15 +149,21 @@ public class PauseMenuScript : MonoBehaviour
     private void ResumeButtonClick()
     {
         moveStart = true;
+        soundManager.PlaySound("Moo");
+        soundManager.PlaySound("Abduction");
     }
 
     private void mainMenuButtonClick()
     {
         moveMainMenu = true;
+        soundManager.PlaySound("Moo");
+        soundManager.PlaySound("Abduction");
     }
 
     private void resetePositionButtonClick()
     {
         moveResetePosition = true;
+        soundManager.PlaySound("Moo");
+        soundManager.PlaySound("Abduction");
     }
 }

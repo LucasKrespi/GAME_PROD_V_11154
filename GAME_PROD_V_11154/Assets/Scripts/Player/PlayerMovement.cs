@@ -25,7 +25,14 @@ public class PlayerMovement : MonoBehaviour
     public int cowsCounter = 0;
     public int lives = 5;
 
-  
+    //Souds
+    public SoundManager soundManager;
+
+    private void Start()
+    {
+        soundManager = FindObjectOfType<SoundManager>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -70,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
                     hit.rigidbody.velocity = new Vector3(0.0f, 2.0f, 0.0f);
                   
                     hit.rigidbody.useGravity = false;
+
+                    soundManager.PlaySound("Moo"); 
+                    soundManager.PlaySound("Abduction");
                 }
             }
         }
@@ -103,7 +113,9 @@ public class PlayerMovement : MonoBehaviour
         {
             lives--;
 
-            FindObjectOfType<GameControl>().timer = FindObjectOfType<GameControl>().timer - 30;
+            FindObjectOfType<GameControl>().timer = FindObjectOfType<GameControl>().timer - 20;
+
+            soundManager.PlaySound("MeteorExplosion");
         }
     }
 

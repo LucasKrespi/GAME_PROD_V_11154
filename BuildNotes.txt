@@ -3,6 +3,19 @@ This Current Build Demostrates movement and terraing generation,
 and spawm of cows and trees. 
 In this Build you can also abduct the cows and turn on the abduction
 cam.
+
+'NEW' you now got a score, that is increased by 1 every second and by 1000
+every cow abducted.
+ 
+'NEW' There is a timer now, when it gets to zero its gameover, you can get 
+more time, every 10 cows you get + 20 seconds on the clock.
+
+'NEW' Take care with the meteors falling down on you, every hit you lose a life,
+and 30 seconds on the timer D: .
+
+'NEW' Main menu/loading/pause/gameover screens added. if you ever get stuck
+you can reset your position on the pause menu. 
+
 ===========================Controls==================================
 
 right mouse click - start abduction.
@@ -13,18 +26,18 @@ space - brake.
 
 WASD - move around.
 
-esc - quit application.
+esc - pause application.
 
-===========================Comments ==================================
+===========================Comments===================================
 
 Ship movement gets loked during abduction.->intentionally
-Currently the game has only one state(game state).
-Trees spawn in some wierd places.
-The cameras have great room for improovement.
+
+Some times the player can get stuck on a tree or doring an abduction,
+if a meteor hits the cow away.
 
 ===========================For Next Build=============================
--Add Meteor as obstacles;
--Add a scorring system;
--populate the word with more objs;
--add some sort of AI to the cows (still thinking about how this is going to work);
--add AI, Menus and pause state;
+- add highscore screen and save score and player name;
+- add sound manager and sounds;
+- add a golden cow that gives bonus;
+- add a dash to the ship to avoid meteors(?);
+- every time a meteor hit a cow, turn it in to beef;
