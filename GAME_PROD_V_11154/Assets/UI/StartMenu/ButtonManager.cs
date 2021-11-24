@@ -24,7 +24,7 @@ public class ButtonManager : MonoBehaviour
 
     void Start()
     {
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = SoundManager.soundManagerInstace;
         init();
 
     }

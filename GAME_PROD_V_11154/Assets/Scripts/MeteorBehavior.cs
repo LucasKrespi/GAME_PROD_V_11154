@@ -11,7 +11,7 @@ public class MeteorBehavior : MonoBehaviour
     void Start()
     {
         trail.Play();
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = SoundManager.soundManagerInstace;
     }
 
     // Update is called once per frame

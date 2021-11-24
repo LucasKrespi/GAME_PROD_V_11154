@@ -41,7 +41,7 @@ public class PauseMenuScript : MonoBehaviour
         mainMenuButton.onClick.AddListener(mainMenuButtonClick);
         resetePositionButton.onClick.AddListener(resetePositionButtonClick);
 
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = SoundManager.soundManagerInstace;
     }
 
     // Update is called once per frame

@@ -49,7 +49,7 @@ public class GameControl : MonoBehaviour
     private void Start()
     {
 
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = SoundManager.soundManagerInstace;
 
         seconds = 0;
         minutes = 0;

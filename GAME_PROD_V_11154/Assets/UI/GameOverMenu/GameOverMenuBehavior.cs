@@ -29,7 +29,7 @@ public class GameOverMenuBehavior : MonoBehaviour
         initial_pos = selectedButtonFlag.transform.position;
 
         mainMenuButton.Select();
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = SoundManager.soundManagerInstace;
 
         mainMenuButton.onClick.AddListener(StartButtonClick);
         exitButton.onClick.AddListener(ExitButtonClick);

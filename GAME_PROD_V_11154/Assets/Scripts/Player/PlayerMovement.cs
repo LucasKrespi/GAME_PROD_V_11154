@@ -91,6 +91,12 @@ public class PlayerMovement : MonoBehaviour
             playerRigidbody.velocity *= 0.9f;
         }
 
+        //+++++++DEBUG+++++++++
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            lives--;
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
