@@ -5,10 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class ButtonManager : MonoBehaviour
+public class HighScoreButtonManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Button startButton, highScoreButton, exitButton;
+    public Button mainMenuButton, exitButton;
     public Image selectedButtonFlag;
     public SoundManager soundManager;
 
@@ -19,28 +18,28 @@ public class ButtonManager : MonoBehaviour
 
     public float abductionVelocity;
 
-    private bool moveStart, moveExit, moveHighScore;
+    private bool moveMainMenu, moveExit;
+
 
 
     void Start()
     {
+
         soundManager = SoundManager.soundManagerInstace;
 
+
         soundManager.StopSound("BackgroundSound");
-        soundManager.PlaySound("BackgroundSound");
-        init();
+        soundManager.PlaySound("Lucas");
 
-    }
 
-    private void init()
-    {
+
         initial_pos = selectedButtonFlag.transform.position;
 
-        startButton.Select();
+        mainMenuButton.Select();
 
-        startButton.onClick.AddListener(StartButtonClick);
+        mainMenuButton.onClick.AddListener(MainMenuButtonClick);
         exitButton.onClick.AddListener(ExitButtonClick);
-        highScoreButton.onClick.AddListener(HighScoreButtonClick);
+ 
     }
 
     // Update is called once per frame
@@ -48,35 +47,28 @@ public class ButtonManager : MonoBehaviour
     {
         buttonGoal_pos = selectedButtonFlag.transform.position.y;
 
-        if(startButton.transform.position.y >= buttonGoal_pos - 10)
+        if (mainMenuButton.transform.position.y >= buttonGoal_pos - 10)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
+            soundManager.StopSound("Lucas");
         }
 
         if (exitButton.transform.position.y >= buttonGoal_pos - 10)
         {
             Application.Quit();
         }
-
-        if (highScoreButton.transform.position.y >= buttonGoal_pos - 10)
-        {
-            SceneManager.LoadScene(4);
-        }
+        
+        //if ((delay = Potato(delay)) < 0)
+        //{
+        //    Debug.Log("Potato");
+        //}
     }
+
     private void FixedUpdate()
     {
-        if (EventSystem.current.currentSelectedGameObject == startButton.gameObject)
+        if (EventSystem.current.currentSelectedGameObject == mainMenuButton.gameObject)
         {
-            Vector3 goal_pos = startButton.transform.position;
-
-            selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, abductionVelocity), initial_pos.y, initial_pos.z);
-
-            initial_pos = selectedButtonFlag.transform.position;
-        }
-
-        if (EventSystem.current.currentSelectedGameObject == highScoreButton.gameObject)
-        {
-            Vector3 goal_pos = highScoreButton.transform.position;
+            Vector3 goal_pos = mainMenuButton.transform.position;
 
             selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, abductionVelocity), initial_pos.y, initial_pos.z);
 
@@ -93,9 +85,9 @@ public class ButtonManager : MonoBehaviour
         }
 
 
-        if (moveStart && startButton.transform.position.y < buttonGoal_pos)
+        if (moveMainMenu && mainMenuButton.transform.position.y < buttonGoal_pos)
         {
-            whenClicked(startButton);
+            whenClicked(mainMenuButton);
         }
 
         if (moveExit && exitButton.transform.position.y < buttonGoal_pos)
@@ -103,12 +95,8 @@ public class ButtonManager : MonoBehaviour
             whenClicked(exitButton);
         }
 
-
-        if (moveHighScore && highScoreButton.transform.position.y < buttonGoal_pos)
-        {
-            whenClicked(highScoreButton);
-        }
     }
+
 
     private void whenClicked(Button selectedButton)
     {
@@ -119,9 +107,9 @@ public class ButtonManager : MonoBehaviour
         selectedButton.transform.Rotate(new Vector3(0.0f, 0.0f, 1.0f));
     }
 
-    private void StartButtonClick()
+    private void MainMenuButtonClick()
     {
-        moveStart = true;
+        moveMainMenu = true;
         soundManager.PlaySound("Moo");
         soundManager.PlaySound("Abduction");
     }
@@ -134,12 +122,44 @@ public class ButtonManager : MonoBehaviour
 
     }
 
-    private void HighScoreButtonClick()
-    {
-        moveHighScore = true;
-        soundManager.PlaySound("Moo");
-        soundManager.PlaySound("Abduction");
 
-    }
+    ///DELEY TEST
+    //private float Potato(float time)
+    //{
+    //    // them assigne it in to time again if(time = Potato(time) < 0)
+    //    // sort of unecessary function ...
+    //    time -= Time.deltaTime;
+
+    //    return time;
+    //}
+
+    //private bool ReturnTrueAfterSeconds(out float delay)
+    //{
+    //    delay -= Time.deltaTime;
+
+    //    if(delay < 0)
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
+
+    //private bool ReturnTrueAfterSeconds(float delay)
+    //{
+    //    delay -= Time.deltaTime;
+
+    //    if (delay < 0)
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return ReturnTrueAfterSeconds(delay);
+    //        //this logic works just not in the right time.
+    //    }
+    //}
 
 }

@@ -28,9 +28,17 @@ public class PlayerMovement : MonoBehaviour
     //Souds
     public SoundManager soundManager;
 
+    //invunerabilidade
+    private float imuneTimer;
+    private bool isImune = false;
+
+    //Aimn feed back 
+  
+
     private void Start()
     {
-        soundManager = FindObjectOfType<SoundManager>();
+        soundManager = SoundManager.soundManagerInstace;
+       
     }
 
     // Update is called once per frame
@@ -69,16 +77,16 @@ public class PlayerMovement : MonoBehaviour
 
             if (Physics.Raycast(transform.position, -Vector3.up, out hit))
             {
-                if(hit.rigidbody != null)
+                if (hit.rigidbody != null)
                 {
                     cowhit = true;
                     playerRigidbody.velocity = Vector3.zero;
 
                     hit.rigidbody.velocity = new Vector3(0.0f, 2.0f, 0.0f);
-                  
+
                     hit.rigidbody.useGravity = false;
 
-                    soundManager.PlaySound("Moo"); 
+                    soundManager.PlaySound("Moo");
                     soundManager.PlaySound("Abduction");
                 }
             }
@@ -95,6 +103,24 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             lives--;
+        }
+
+
+        //imunity deleay after hit
+        if (isImune)
+        {
+            imuneTimer -= Time.deltaTime;
+
+            if(imuneTimer < 0)
+            {
+                playerRigidbody.gameObject.GetComponentInChildren<MeshRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                isImune = false;
+            }
+            else
+            { 
+                playerRigidbody.gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+            }
+
         }
 
     }
@@ -115,13 +141,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.CompareTag("meteor"))
+
+        if (!isImune)
         {
-            lives--;
+            if (collision.gameObject.CompareTag("meteor"))
+            {
 
-            FindObjectOfType<GameControl>().timer = FindObjectOfType<GameControl>().timer - 20;
+                imuneTimer = 2;
+                isImune = true;
+              
+                lives--;
 
-            soundManager.PlaySound("MeteorExplosion");
+                FindObjectOfType<GameControl>().timer = FindObjectOfType<GameControl>().timer - 20;
+
+                soundManager.PlaySound("MeteorExplosion");
+
+            }
         }
     }
 

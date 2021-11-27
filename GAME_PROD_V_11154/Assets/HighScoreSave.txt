@@ -1,4 +1,6 @@
+tulio,982
 caralhoo,315
 lucas,109
 3,6
+jorge,6
 test,4

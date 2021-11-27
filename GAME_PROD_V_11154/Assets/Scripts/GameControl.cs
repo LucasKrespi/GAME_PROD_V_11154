@@ -19,6 +19,8 @@ public class GameControl : MonoBehaviour
 
     //UIHud Varriables
     public Canvas UIhud;
+    //Aimn FeedBack
+    public Image FeedBack;
     //Timer
     private TextMeshProUGUI timerText;
     public float timer;
@@ -91,6 +93,20 @@ public class GameControl : MonoBehaviour
         if(Occupied_pos.Count > 200)
         {
             Occupied_pos.RemoveFirst();
+        }
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ship_Transform.position, -Vector3.up, out hit))
+        {
+            if (hit.rigidbody != null)
+            {
+                FeedBack.gameObject.SetActive(true);
+            }
+            else
+            {
+                FeedBack.gameObject.SetActive(false);
+            }
         }
     }
 

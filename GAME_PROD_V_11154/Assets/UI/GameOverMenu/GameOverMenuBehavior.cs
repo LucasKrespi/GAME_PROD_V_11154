@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 public class GameOverMenuBehavior : MonoBehaviour
 {
-    public Button mainMenuButton, exitButton;
+    public Button saveButton;
     public Image selectedButtonFlag;
     public SoundManager soundManager;
 
@@ -17,7 +17,7 @@ public class GameOverMenuBehavior : MonoBehaviour
 
     public float abductionVelocity;
 
-    private bool moveStart, moveExit, moveHighScore;
+    private bool moveStart;
 
     public TextMeshProUGUI score;
 
@@ -28,16 +28,12 @@ public class GameOverMenuBehavior : MonoBehaviour
 
         initial_pos = selectedButtonFlag.transform.position;
 
-        mainMenuButton.Select();
+        saveButton.Select();
         soundManager = SoundManager.soundManagerInstace;
 
-        mainMenuButton.onClick.AddListener(StartButtonClick);
-        exitButton.onClick.AddListener(ExitButtonClick);
+        saveButton.onClick.AddListener(SaveButtonClick);
 
         score.text = "Score: " + PlayerPrefs.GetInt("score");
-
-        soundManager.StopSound("BackgroundSound");
-        soundManager.PlaySound("Lucas");
 
     }
 
@@ -46,47 +42,27 @@ public class GameOverMenuBehavior : MonoBehaviour
     {
         buttonGoal_pos = selectedButtonFlag.transform.position.y;
 
-        if (mainMenuButton.transform.position.y >= buttonGoal_pos - 10)
+        if (saveButton.transform.position.y >= buttonGoal_pos - 10)
         {
-            SceneManager.LoadScene(0);
-        }
-
-        if (exitButton.transform.position.y >= buttonGoal_pos - 10)
-        {
-            Application.Quit();
+            SceneManager.LoadScene(4);
         }
     }
     private void FixedUpdate()
     {
-        if (EventSystem.current.currentSelectedGameObject == mainMenuButton.gameObject)
+        if (EventSystem.current.currentSelectedGameObject == saveButton.gameObject)
         {
-            Vector3 goal_pos = mainMenuButton.transform.position;
+            Vector3 goal_pos = saveButton.transform.position;
 
             selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, abductionVelocity), initial_pos.y, initial_pos.z);
 
             initial_pos = selectedButtonFlag.transform.position;
         }
 
-
-        if (EventSystem.current.currentSelectedGameObject == exitButton.gameObject)
+        if (moveStart && saveButton.transform.position.y < buttonGoal_pos)
         {
-            Vector3 goal_pos = exitButton.transform.position;
-
-            selectedButtonFlag.transform.position = new Vector3(Mathf.Lerp(initial_pos.x, goal_pos.x, abductionVelocity), initial_pos.y, initial_pos.z);
-
-            initial_pos = selectedButtonFlag.transform.position;
+            whenClicked(saveButton);
         }
 
-
-        if (moveStart && mainMenuButton.transform.position.y < buttonGoal_pos)
-        {
-            whenClicked(mainMenuButton);
-        }
-
-        if (moveExit && exitButton.transform.position.y < buttonGoal_pos)
-        {
-            whenClicked(exitButton);
-        }
     }
 
     private void whenClicked(Button selectedButton)
@@ -98,15 +74,11 @@ public class GameOverMenuBehavior : MonoBehaviour
         selectedButton.transform.Rotate(new Vector3(0.0f, 0.0f, 1.0f));
     }
 
-    private void StartButtonClick()
+    private void SaveButtonClick()
     {
         moveStart = true;
         soundManager.PlaySound("Moo");
+        soundManager.PlaySound("Abduction");
     }
 
-    private void ExitButtonClick()
-    {
-        moveExit = true;
-        soundManager.PlaySound("Moo");
-    }
 }

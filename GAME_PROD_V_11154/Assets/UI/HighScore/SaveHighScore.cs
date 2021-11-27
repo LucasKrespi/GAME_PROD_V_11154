@@ -97,7 +97,7 @@ public class SaveHighScore : MonoBehaviour
                 {
                     highScores.AddBefore(index, score);
 
-                    if (highScores.Count > 10)
+                    if (highScores.Count > maxHighScore)
                     {
                         highScores.RemoveLast();
                     }
