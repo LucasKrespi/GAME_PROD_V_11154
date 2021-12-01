@@ -1,3 +1,5 @@
+jorge,2216
+,2216
 tulio,982
 caralhoo,315
 lucas,109

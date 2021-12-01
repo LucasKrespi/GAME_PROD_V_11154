@@ -223,10 +223,19 @@ public class GameControl : MonoBehaviour
 
     private void checkGameOver()
     {
-        if(ship_PlayerMovement.lives == 0 || (minutes <= 0) && (seconds <= 0))
+        if(ship_PlayerMovement.lives == 0)
         {
-            //Temporary save score will be changed to json or a txt file for final submission.
+           
             PlayerPrefs.SetInt("score", ship_PlayerMovement.score);
+            PlayerPrefs.SetInt("gameover", 0);
+
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene(3);
+        }
+        else if((minutes <= 0) && (seconds <= 0))
+        {
+            PlayerPrefs.SetInt("score", ship_PlayerMovement.score);
+            PlayerPrefs.SetInt("gameover", 1);
 
             Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene(3);

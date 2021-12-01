@@ -20,8 +20,6 @@ public class HighScoreButtonManager : MonoBehaviour
 
     private bool moveMainMenu, moveExit;
 
-
-
     void Start()
     {
 
@@ -58,10 +56,6 @@ public class HighScoreButtonManager : MonoBehaviour
             Application.Quit();
         }
         
-        //if ((delay = Potato(delay)) < 0)
-        //{
-        //    Debug.Log("Potato");
-        //}
     }
 
     private void FixedUpdate()
@@ -121,45 +115,5 @@ public class HighScoreButtonManager : MonoBehaviour
         soundManager.PlaySound("Abduction");
 
     }
-
-
-    ///DELEY TEST
-    //private float Potato(float time)
-    //{
-    //    // them assigne it in to time again if(time = Potato(time) < 0)
-    //    // sort of unecessary function ...
-    //    time -= Time.deltaTime;
-
-    //    return time;
-    //}
-
-    //private bool ReturnTrueAfterSeconds(out float delay)
-    //{
-    //    delay -= Time.deltaTime;
-
-    //    if(delay < 0)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
-
-    //private bool ReturnTrueAfterSeconds(float delay)
-    //{
-    //    delay -= Time.deltaTime;
-
-    //    if (delay < 0)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return ReturnTrueAfterSeconds(delay);
-    //        //this logic works just not in the right time.
-    //    }
-    //}
 
 }
